@@ -1,0 +1,23 @@
+mat-card {
+    margin :100px auto;
+    width: 40%;
+}
+
+mat-card-title {
+    display: inline;
+}
+
+mat-icon {
+    position: absolute;
+    top : 15px;
+    right: 30px;;
+}
+
+mat-progress-bar {
+    margin: 5px;;
+}
+
+*:focus {
+    outline: none !important;
+    border: 0 !important;
+}
