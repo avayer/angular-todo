@@ -1,29 +1,37 @@
-<mat-card>
+<mat-card [ngStyle]="{backgroundColor: getTheme(), color: getColor()}">
   <mat-card-title><span [matBadge]="todoList.length" matBadgeOverlap="false">Todo-List</span></mat-card-title>
-  <span><mat-icon aria-hidden="false" aria-label="Example home icon">edit</mat-icon></span>
+    <span class="toggle-style">Light<mat-slide-toggle class="example-margin" [color]="color" [(ngModel)]="checked">Dark</mat-slide-toggle></span>
   <mat-progress-bar mode="determinate" [value]="noofCompleted"></mat-progress-bar>
 <mat-selection-list>
   <mat-list-item>
   <form #dataForm class="example-form" (keydown)="keyDownFunction($event, todoItem)">
     <mat-form-field class="example-full-width">
-      <mat-label>Add a Todo..</mat-label>
+      <mat-label [ngStyle]="{color: getColor()}">Add a Todo..</mat-label>
       <input matInput placeholder="Ex. Buy grocery" #todoItem>
-      <!-- <span>
-        <mat-icon class="add-todo-btn" aria-hidden="false" aria-label="Example home icon">post_add</mat-icon>
-      </span> -->
     </mat-form-field>
     </form>
   </mat-list-item>
-  <mat-list-item (click)="markCompleted(item, i)" *ngFor="let item of todoList;let i = index">
-    {{ item }}
+  <mat-list-item  [ngStyle]="{color: getColor()}"  *ngFor="let item of todoList;let index = index">
+      <span>
+        <mat-icon class="done-btn" (click)="markCompleted(index, item.name)" aria-hidden="false" aria-label="Example done icon">done</mat-icon>
+      </span>
+    <editable (update)="updateField(index, 'name')">
+    <ng-template viewMode>{{item.name}}</ng-template>
+    <ng-template editMode>
+      <input [formControl]="getControl(index, 'name')" editableOnEnter>
+    </ng-template>
+    </editable>
+    <span>
+      <mat-icon class="delete-btn" aria-hidden="false" aria-label="Example delete icon" (click)="deletePost(item.name, index)">delete</mat-icon>
+    </span>
   </mat-list-item>
 </mat-selection-list>
 </mat-card>
 
-<mat-card>
+<mat-card [ngStyle]="{backgroundColor : getTheme(), color: getColor()}">
   <mat-card-title>Completed</mat-card-title>
   <mat-selection-list>
-    <mat-list-item *ngFor="let item of completed;let i = index">
+    <mat-list-item [ngStyle]="{color: getColor()}" *ngFor="let item of completed;let i = index">
       {{ item }}
     </mat-list-item>
   </mat-selection-list>

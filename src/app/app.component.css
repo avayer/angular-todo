@@ -7,10 +7,27 @@ mat-card-title {
     display: inline;
 }
 
-mat-icon {
+mat-slide-toggle {
+    margin-left: 5px;
+    margin-right: 4px;;
+}
+.toggle-style{
     position: absolute;
-    top : 15px;
-    right: 30px;;
+    top : 20px;
+    right : 10px;
+}
+
+.delete-btn, .done-btn{
+  cursor: pointer;
+}
+
+.delete-btn {
+    position: absolute;
+    left : 500px;
+}
+
+.delete-btn:hover {
+        color : red
 }
 
 mat-progress-bar {
@@ -21,3 +38,4 @@ mat-progress-bar {
     outline: none !important;
     border: 0 !important;
 }
+
