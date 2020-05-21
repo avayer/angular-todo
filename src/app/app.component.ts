@@ -8,8 +8,9 @@ import { ThemePalette } from '@angular/material/core';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent  {
 
+
+export class AppComponent  {
 
   color: ThemePalette = 'primary';
   @ViewChild('dataForm', { static: true }) form: ElementRef;
@@ -17,6 +18,8 @@ export class AppComponent  {
   checked = false;
   completed: string[] = []
   noofCompleted = 0;
+  controls: FormArray;
+  
   todoList = [ 
     { name: 'item1' },
     { name: 'item2' },
@@ -24,53 +27,48 @@ export class AppComponent  {
     { name: 'item4' }
   ];
 
+  //Move an Completed item to Completed array
   markCompleted(index, name) {
     this.todoList.splice(index, 1);
     this.completed.push(name);
     this.noofCompleted = this.completed.length / (this.todoList.length + this.completed.length) * 100;
   }
 
+  // Add a new item to TodoList and add form controls to new item
   keyDownFunction(event, todoItem: HTMLInputElement) {
     if (event.keyCode === 13) {
       this.todoList.push({name : todoItem.value});
       this.form.nativeElement.reset();
+      this.controls.push(new FormGroup({
+        name: new FormControl(todoItem.value, Validators.required)
+      }));
       this.noofCompleted = this.completed.length / (this.todoList.length + this.completed.length) * 100;
     }
   }
-
+// Delete a post from TodoList
   deletePost(item, i) {
     this.todoList.splice(i, 1);
-    console.log(this.todoList);
     this.noofCompleted = this.completed.length / (this.todoList.length + this.completed.length) * 100;
-  }
+  }  
 
-  getTheme() {
-    return this.checked ? '#121212' : 'white';
-  }
-
-  getColor() {
-    return this.checked ? 'white' : '';
-  }
-
-  controls: FormArray;
-
+  // create a from group and add form controls to exisiting elements
   ngOnInit() {
     const toGroups = this.todoList.map(entity => {
 
       return new FormGroup({
-        name: new FormControl(entity.name, Validators.required),
+        name: new FormControl(entity.name, Validators.required)
       });
     });
     this.controls = new FormArray(toGroups);
-
   }
 
+  //Access the selected list item
   getControl(index: number, field: string): FormControl {
     return this.controls.at(index).get(field) as FormControl;
   }
 
+  //Update the data with new value
   updateField(index: number, field: string) {
-    console.log(index + ", " + field);
     const control = this.getControl(index, field);
 
     if (control.valid) {
@@ -84,9 +82,15 @@ export class AppComponent  {
         return e;
       })
     }
-    console.log(this.todoList);
   }
- 
-  
+
+  // get color and theme for dark mode styling
+  getTheme() {
+    return this.checked ? '#121212' : 'white';
+  }
+
+  getColor() {
+    return this.checked ? 'white' : '';
+  }
 
 }
