@@ -1,7 +1,7 @@
 <mat-card [ngStyle]="{backgroundColor: getTheme(), color: getColor()}">
   <mat-card-title><span [matBadge]="todoList.length" matBadgeOverlap="false">Todo-List</span></mat-card-title>
     <span class="toggle-style">Light<mat-slide-toggle class="example-margin" [color]="color" [(ngModel)]="checked">Dark</mat-slide-toggle></span>
-  <mat-progress-bar mode="determinate" [value]="noofCompleted"></mat-progress-bar>
+  <mat-progress-bar mode="determinate" [value]="getProgressStatus()"></mat-progress-bar>
 <mat-selection-list>
   <mat-list-item>
   <form #dataForm class="example-form" (keydown)="keyDownFunction($event, todoItem)">

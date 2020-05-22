@@ -31,7 +31,6 @@ export class AppComponent  {
   markCompleted(index, name) {
     this.todoList.splice(index, 1);
     this.completed.push(name);
-    this.noofCompleted = this.completed.length / (this.todoList.length + this.completed.length) * 100;
   }
 
   // Add a new item to TodoList and add form controls to new item
@@ -42,13 +41,12 @@ export class AppComponent  {
       this.controls.push(new FormGroup({
         name: new FormControl(todoItem.value, Validators.required)
       }));
-      this.noofCompleted = this.completed.length / (this.todoList.length + this.completed.length) * 100;
+      
     }
   }
 // Delete a post from TodoList
   deletePost(item, i) {
     this.todoList.splice(i, 1);
-    this.noofCompleted = this.completed.length / (this.todoList.length + this.completed.length) * 100;
   }  
 
   // create a from group and add form controls to exisiting elements
@@ -82,6 +80,10 @@ export class AppComponent  {
         return e;
       })
     }
+  }
+
+  getProgressStatus() {
+   return this.noofCompleted = this.completed.length / (this.todoList.length + this.completed.length) * 100;
   }
 
   // get color and theme for dark mode styling
