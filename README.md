@@ -4,15 +4,29 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 This is a simple Todo-List.
 
+---
+
 ## Pre-requisites
 
--NodeJs
+**Install NodeJs**
+
+---
 
 ## How to run
 
-- git clone https://github.com/avayer/angular-todo.gitrun
-- run npm install 
-- run ng serve
+> **Clone the project** 
+>>git clone https://github.com/avayer/angular-todo.git
+
+>**Install all dependencies**
+>>run npm install 
+
+>**Lauch server by using the following command**
+>> ng serve
+
+>**Open your browser and visit**
+>>localhost:4200
+
+---
 
 ## References
 
